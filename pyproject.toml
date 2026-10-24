@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mgp-bfm"
+version = "0.2.1"
+description = "Bayesian factor analysis with the multiplicative gamma process shrinkage prior: unified sklearn-style interface to the JAX Gibbs sampler and CAVI"
+readme = "README.md"
+license = { text = "GPL-2.0-only" }
+requires-python = ">=3.10"
+dependencies = ["jax", "numpy"]
+
+[project.optional-dependencies]
+plot = ["matplotlib"]
+ess = ["arviz"]
+rsp = ["optax>=0.2.8"]
+test = ["scipy"]
+
+[tool.setuptools]
+packages = ["mgp", "mgp._gs", "mgp._vi", "mgp._rsp", "mgp._rsp.core", "mgp._rsp.kernels"]
