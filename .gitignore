@@ -30,3 +30,7 @@ htmlcov/
 .DS_Store
 Thumbs.db
 Desktop.ini
+
+# PBMC experiment outputs
+PBMC/data/
+PBMC/figures/

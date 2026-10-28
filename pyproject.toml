@@ -16,6 +16,24 @@ plot = ["matplotlib"]
 ess = ["arviz"]
 rsp = ["optax>=0.2.8"]
 test = ["scipy"]
+pbmc = [
+    "anndata",
+    "arviz",
+    "matplotlib",
+    "ipython",
+    "ipykernel",
+    "nbclient",
+    "nbformat",
+    "optax>=0.2.8",
+    "pandas",
+    "psutil",
+    "python-igraph",
+    "scanpy",
+    "scikit-learn",
+    "scikit-misc",
+    "scipy",
+    "umap-learn",
+]
 
 [tool.setuptools]
 packages = ["mgp", "mgp._gs", "mgp._vi", "mgp._rsp", "mgp._rsp.core", "mgp._rsp.kernels"]
