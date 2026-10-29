@@ -34,3 +34,6 @@ Desktop.ini
 # PBMC experiment outputs
 PBMC/data/
 PBMC/figures/
+
+# Local PBMC workflow notes
+PBMC/plan.md

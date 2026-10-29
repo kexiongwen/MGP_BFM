@@ -20,11 +20,11 @@ def build_and_execute():
         nb.cells.append(nbformat.v4.new_code_cell(textwrap.dedent(text).strip()))
 
     md("""
-    # PBMC3k：PCA、CAVI 与 Gibbs 最终结果汇报
+    # PBMC3k: Final Results for PCA, CAVI, and Gibbs
 
-    本 notebook 汇总当前固定工作流程的最终结果：`X_scaled`、`K=50`、`b_sigma=1`、RSP、载荷列 L2 范数加权、前 20 列 `d20_norm`。CAVI 使用 float64，Gibbs 使用 float32；Leiden 分辨率分别为 **0.425** 和 **0.500**，两种方法均为 **9 簇**。
+    This notebook summarizes the final results of the fixed workflow: `X_scaled`, `K=50`, `b_sigma=1`, RSP, loading-column L2-norm weighting, and the first 20 columns (`d20_norm`). CAVI uses float64 and Gibbs uses float32. Their Leiden resolutions are **0.425** and **0.500**, respectively, and both methods produce **9 clusters**.
 
-    图片中的簇编号从 1 开始，底层结果文件保留原始从 0 开始的编号。ARI/AMI 仅表示聚类一致性，不表示细胞类型准确率。本 notebook 只读取已保存结果，不重新拟合模型。
+    Cluster labels in the figures start at 1, while the underlying result files retain the original zero-based labels. ARI/AMI measure clustering agreement, not cell-type accuracy. This notebook reads saved results only and does not refit the models.
     """)
 
     code("""
@@ -75,9 +75,9 @@ def build_and_execute():
     """)
 
     md("""
-    ## 1. 聚类数量与 ARI/AMI
+    ## 1. Cluster counts and ARI/AMI
 
-    PCA 仅作参照，不作为细胞类型真值。AMI 为 adjusted mutual information。
+    PCA is used only as a reference and not as ground truth for cell types. AMI stands for adjusted mutual information.
     """)
 
     code("""
@@ -102,9 +102,9 @@ def build_and_execute():
     """)
 
     md("""
-    ## 2. UMAP 聚类图
+    ## 2. UMAP clustering plots
 
-    UMAP 仅用于展示结构，不能单独作为算法优劣的证据。
+    UMAP is used for visualization only and is not, by itself, evidence of superior algorithm performance.
     """)
 
     code("""
@@ -112,9 +112,9 @@ def build_and_execute():
     """)
 
     md("""
-    ## 3. 每簇 Top 5 markers
+    ## 3. Top 5 markers per cluster
 
-    Marker 分析使用全部质控基因的 `lognorm`、Wilcoxon 检验和 BH 校正。完整 score、log fold change 和 p 值保存在对应 CSV 中。
+    Marker analysis uses all quality-controlled genes in `lognorm`, the Wilcoxon test, and Benjamini-Hochberg correction. Full scores, log fold changes, and p-values are stored in the corresponding CSV files.
     """)
 
     code("""
@@ -137,9 +137,9 @@ def build_and_execute():
     """)
 
     md("""
-    ## 4. 模型、调参与采样诊断
+    ## 4. Model, tuning, and sampling diagnostics
 
-    CAVI 的轮数包含首次运行与 warm-start 续跑。Gibbs 的 ESS、MCSE 和半链诊断均保留；单条长链不证明整个后验已充分探索。
+    The CAVI sweep count includes both the initial run and the warm-start continuation. ESS, MCSE, and split-chain diagnostics are retained for Gibbs; a single long chain does not prove that the full posterior has been adequately explored.
     """)
 
     code("""
@@ -180,9 +180,9 @@ def build_and_execute():
     """)
 
     md("""
-    ## 5. RSP 对齐前后载荷列 L2 范数
+    ## 5. Loading-column L2 norms before and after RSP
 
-    CAVI 比较 `mu_` 与 `mu_aligned_`；Gibbs 比较原始载荷后验均值与 RSP 对齐后验均值。
+    CAVI compares `mu_` with `mu_aligned_`; Gibbs compares the posterior mean loadings before and after RSP alignment.
     """)
 
     code("""
@@ -193,7 +193,7 @@ def build_and_execute():
     """)
 
     md("""
-    ## 6. Leiden 种子与近邻数稳定性
+    ## 6. Stability across Leiden seeds and neighbor counts
     """)
 
     code("""
@@ -211,7 +211,7 @@ def build_and_execute():
     """)
 
     md("""
-    ## 7. 其他诊断图
+    ## 7. Additional diagnostic plots
     """)
 
     code("""
@@ -221,15 +221,15 @@ def build_and_execute():
     """)
 
     md("""
-    ## 8. 最终验收
+    ## 8. Final validation
 
-    - CAVI 满足 `tol`，两种 RSP 均为 `status_code=1`。
-    - 两种 score 均先按载荷列范数加权，再取前 20 列。
-    - CAVI 与 Gibbs 均为 9 簇，每簇恰好 5 个 marker。
-    - 图片簇编号从 1 开始。
-    - `seurat_analysis.py --stage validate` 返回 `passed`，报告内链接全部有效。
+    - CAVI satisfies `tol`, and both RSP runs have `status_code=1`.
+    - Both score matrices are weighted by loading-column norms before selecting the first 20 columns.
+    - CAVI and Gibbs both produce 9 clusters, with exactly 5 markers per cluster.
+    - Cluster labels in the figures start at 1.
+    - `seurat_analysis.py --stage validate` returns `passed`, and all report links are valid.
 
-    复现命令和固定配置见 `PBMC/reproduce.md`，唯一工作流程见 `PBMC/plan.md`。
+    See `PBMC/reproduce.md` for reproduction commands and the fixed configuration, and `PBMC/plan.md` for the sole workflow.
     """)
 
     code("""

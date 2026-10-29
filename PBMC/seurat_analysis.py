@@ -340,9 +340,9 @@ def figures(output_dir=FIGURE_DIR):
     paths = []
     fig, axes = plt.subplots(1, 3, figsize=(16, 5), constrained_layout=True)
     for ax, (title, method, run_id, representation) in zip(axes, (
-        ("CAVI f64: d20_norm", "cavi", CAVI_RUN, REPRESENTATION),
-        ("Gibbs f32: d20_norm", "gibbs", GIBBS_RUN, REPRESENTATION),
-        ("Seurat PCA: 50 PCs", "pca", PCA_RUN, "d50"),
+        ("CAVI", "cavi", CAVI_RUN, REPRESENTATION),
+        ("GS", "gibbs", GIBBS_RUN, REPRESENTATION),
+        ("PCA", "pca", PCA_RUN, "d50"),
     )):
         cluster_key = f"leiden_{run_id}_{representation}"
         display_key = "cluster_1_based"

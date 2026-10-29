@@ -121,7 +121,8 @@ def save_loading_norm_figures(cavi_model, gibbs_model, output_dir):
         ax.plot(columns, aligned, marker=".", linewidth=1, label="After RSP")
         ax.set_xlabel("factor column")
         ax.set_ylabel("loading column L2 norm")
-        ax.set_title(f"Loading column norms: {method}")
+        title = "CAVI" if method == "cavi" else "GS"
+        ax.set_title(title)
         ax.legend()
         path = output_dir / filename
         fig.savefig(path, dpi=150)
